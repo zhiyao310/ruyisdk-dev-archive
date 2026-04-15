@@ -14,7 +14,6 @@ ruyi update
 ruyi install gnu-plct-xthead
 ```
 
-![image-20260316130355929](./images/image-20260316130355929.png)
 
 #### 创建并激活 Ruyi 虚拟环境
 
@@ -29,7 +28,6 @@ cd dhrystone-venv
 source ./bin/ruyi-activate
 ```
 
-![image-20260316130438916](./images/image-20260316130438916.png)
 
 #### 验证GCC版本
 
@@ -51,7 +49,6 @@ git clone https://github.com/Keith-S-Thompson/dhrystone.git
 cd dhrystone
 ```
 
-![image-20260316130516513](./images/image-20260316130516513.png)
 
 ### 使用 nano 添加缺失的头文件
 
@@ -82,7 +79,6 @@ sed -i '/extern  int.*times/d' dhry_1.c
 
 ![image-20260316130902340](./images/image-20260316130902340.png)
 
-![image-20260316131240955](./images/image-20260316131240955.png)
 
 ### 修正重复包含头文件的问题
 
@@ -112,7 +108,6 @@ cat -n dhry_1.c | head -20
 riscv64-plctxthead-linux-gnu-gcc -std=gnu90 -O2 -DNOENUM -DTIMES -DHZ=100 -o dhrystone dhry_1.c dhry_2.c -lm
 ```
 
-![image-20260316131349885](./images/image-20260316131349885.png)
 
 ## 三、运行 Dhrystone 基准测试
 
@@ -132,8 +127,73 @@ Please give the number of runs through the benchmark:
 ```bash
 echo 10000000 | ./dhrystone
 ```
+### 输出结果
 
-![image-20260316131410788](./images/image-20260316131410788.png)
+```bash
+Â«Ruyi dhrystone-venvÂ» debian@revyos-lpi4a:~/projects/dhrystone/dhrystone/v2.1$ ./dhrystone
+
+Dhrystone Benchmark, Version 2.1 (Language: C)
+
+Program compiled without 'register' attribute
+
+Please give the number of runs through the benchmark: 100000000
+
+Execution starts, 100000000 runs through Dhrystone
+Execution ends
+
+Final values of the variables used in the benchmark:
+
+Int_Glob:            5
+        should be:   5
+Bool_Glob:           1
+        should be:   1
+Ch_1_Glob:           A
+        should be:   A
+Ch_2_Glob:           B
+        should be:   B
+Arr_1_Glob[8]:       7
+        should be:   7
+Arr_2_Glob[8][7]:    100000010
+        should be:   Number_Of_Runs + 10
+Ptr_Glob->
+  Ptr_Comp:          90784
+        should be:   (implementation-dependent)
+  Discr:             0
+        should be:   0
+  Enum_Comp:         2
+        should be:   2
+  Int_Comp:          17
+        should be:   17
+  Str_Comp:          DHRYSTONE PROGRAM, SOME STRING
+        should be:   DHRYSTONE PROGRAM, SOME STRING
+Next_Ptr_Glob->
+  Ptr_Comp:          90784
+        should be:   (implementation-dependent), same as above
+  Discr:             0
+        should be:   0
+  Enum_Comp:         1
+        should be:   1
+  Int_Comp:          18
+        should be:   18
+  Str_Comp:          DHRYSTONE PROGRAM, SOME STRING
+        should be:   DHRYSTONE PROGRAM, SOME STRING
+Int_1_Loc:           5
+        should be:   5
+Int_2_Loc:           13
+        should be:   13
+Int_3_Loc:           7
+        should be:   7
+Enum_Loc:            1
+        should be:   1
+Str_1_Loc:           DHRYSTONE PROGRAM, 1'ST STRING
+        should be:   DHRYSTONE PROGRAM, 1'ST STRING
+Str_2_Loc:           DHRYSTONE PROGRAM, 2'ND STRING
+        should be:   DHRYSTONE PROGRAM, 2'ND STRING
+
+Microseconds for one run through Dhrystone:    0.1 
+Dhrystones per Second:                      13106160.0
+```
+
 
 ### 四、返回上级目录并退出 Ruyi 虚拟环境
 
@@ -145,4 +205,3 @@ cd ..
 ruyi-deactivate
 ```
 
-![image-20260316164108311](./images/image-20260316164108311.png)
